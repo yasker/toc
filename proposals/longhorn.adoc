@@ -4,11 +4,13 @@
 
 *Project Description:*
 
-Longhorn is an open source distributed block storage software for Kubernetes. Longhorn provides a lightweight and portable persistent storage support for any Kubernetes cluster, no matter where it is hosted.
+Longhorn is open source distributed block storage software for Kubernetes. Longhorn is a lightweight and portable implementation of persistent storage that works for any Kubernetes cluster. Longhorn implements distributed block device volumes that can be mounted as read-write by a single node (ReadWriteOnce).
 
-Longhorn is designed to leverage the existing modern technologies as much as possible, like the high-speed, high capacity SSD and NVMe, and proven Linux storage features like sparse files and cgroups. In Longhorn, every volume is implemented by independent microservices, orchestrated by Kubernetes. With the help of Kubernetes and other technologies, the main code base of Longhorn is only about thirty thousand lines. It's written in Go and broken into well-defined clean modules, so it's easy to understand and work with.
+Longhorn is designed to leverage the existing Linux technologies as much as possible, rather than building a complex storage technology stack from scratch. Longhorn takes advange of modern high-speed and high capacity SSD and NVMe storage, and proven Linux storage features like sparse files and cgroups.
 
-Here are some highlight features of Longhorn:
+Longhorn's most distinct feature is to implement each volume as an independent microservice. By leveraging Kubernetes to orchestrate the volumes, Longhorn implements a highly feature-rich enterprise-grade distributed block storage system with about 30K line of Golang code. 
+
+Here are the major features of Longhorn:
 
 * Enterprise-grade distributed storage software
 * Incremental snapshot of the block storage
@@ -20,19 +22,21 @@ Here are some highlight features of Longhorn:
 
 **Architecture**
 
-Longhorn consists of below major components:
+Longhorn consists of the following major components:
 
-**Engine**
+**Engine and Replicas**
 
-Longhorn engines are directly responsible for implementing the Longhorn data plane. Data plane implements the reading and writing of block devices. When Longhorn receives a request for a new volume, it creates one engine and multiple replicas to implement the data plane of this volume. Longhorn will find some disks on different nodes that have enough space to store the volume and schedules replica to each of them. After replicas start, the engine will connect to the replicas, implement a block device and provide it to the node that the pod is running in. Then the block device would be formatted and mounted in the node, finally provided to the container as a volume.
+Longhorn engine is the microserve used to implement each volume. Longhorn engine implements the data plane of reading and writing the block devices. Each Longhorn volume is implemented using one engine and multiple replicas. Longhorn engine always runs on the same node as the pod consuming the volume, whereas Longhorn replicas reside on different nodes to ensure redundency. 
 
-As long as replicas are located in the different nodes, losing nodes wouldn't be a problem unless you lose all the nodes that replicas running on. Another benefit of this architect is, the data paths of the volumes are separated from each other. What may happen to one volume's data path won't affect any other volumes' data path, which makes the Longhorn volumes more resilient.
+Longhorn delivers added resiliency because the data plane for each volume is separate. A software bug that causes one volume to malfunction does not impact other volumes in the system.
 
 **Manager**
 
-Longhorn manager is built on top of Kubernetes. It implements the control plane of storage operations. It uses CRD and Kubernetes API server to store Longhorn's state in the Kubernetes cluster. The manager relays on the Kubernetes controller pattern to manage the volume status. It also utilizes Kubernetes to implement pod orchestration, cron job, node failure detection, pod failure detection, log collection, etc. Building on top of Kubernetes makes the manager implementation much simpler. The manager can focus on storage-related operations thanks to the Kubernetes.
+Longhorn manager is built on top of Kubernetes. It implements CSI driver for Longhorn and leverages Kubernetes to ensure the proper functioning of all engines and replicas. Longhorn manager relies on the Kubernetes controller pattern to manage the volume status. It also utilizes Kubernetes to implement pod orchestration, cron job, node failure detection, pod failure detection, log collection, etc. 
 
-Besides engine and manager, Longhorn also has an intuitive GUI and a test suite which covers every major features of Longhorn. Integration test cases are required for new feature and major bug in Longhorn.
+**Other Components**
+
+Besides engine and manager, Longhorn also has an intuitive GUI and a test suite which covers every major features of Longhorn. Integration test cases are required for new features and major bug fixes.
 
 *Statement on alignment with CNCF mission:*
 
