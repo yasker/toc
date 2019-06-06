@@ -1,0 +1,95 @@
+=== Longhorn CNCF Sandbox Project Proposal
+
+*Name of Project:* Longhorn
+
+*Project Description:*
+
+Longhorn is a distributed block storage system for Kubernetes.
+
+Longhorn is lightweight, reliable, and powerful. You can install Longhorn on an existing Kubernetes cluster with one kubectl apply command or using Helm charts. Once Longhorn is installed, it adds persistent volume support to the Kubernetes cluster.
+
+Longhorn implements distributed block storage using containers and microservices. Longhorn creates a dedicated storage controller for each block device volume and synchronously replicates the volume across multiple replicas stored on multiple nodes. The storage controller and replicas are themselves orchestrated using Kubernetes. Here are some notable features of Longhorn:
+
+* Enterprise-grade distributed storage with no single point of failure
+* Incremental snapshot of block storage
+* Backup to secondary storage (NFS or S3-compatible object storage) built on efficient change block detection
+* Recurring snapshot and backup
+* Automated non-disruptive upgrade. You can upgrade the entire Longhorn software stack without disrupting running volumes.
+* Intuitive GUI
+
+Longhorn consists of below major components:
+
+**Engine**
+
+Longhorn engine implements the data plane of a Longhorn volume.
+
+**Manager**
+
+Longhorn manager implements the control plane of Longhorn.
+
+*Statement on alignment with CNCF mission:*
+
+As a Cloud Native storage solution, Longhorn is well-aligned with the CNCF mission. Longhorn is built on top of Kubernetes, made to be vendor agnostic, can be run with any Kubernetes installation. Longhorn extends Kubernetes by providing a open source full function storage solution within reach for any Kubernetes clusters.
+
+*Sponsors from TOC:* Alexis Richardson and Liz Rice
+
+*Preferred maturity level:* Sandbox
+
+*License:* Apache License v2.0
+
+*Source control:* GitHub (https://github.com/rancher/longhorn)
+
+*External Dependencies:* See https://github.com/rancher/longhorn/blob/master/external-dependency.md[external-dependency.md] file.
+
+Longhorn repositories include: (To be moved into a separate organization)
+* https://github.com/rancher/longhorn
+* https://github.com/rancher/longhorn-engine
+* https://github.com/rancher/longhorn-engine-launcher
+* https://github.com/rancher/longhorn-manager
+* https://github.com/rancher/longhorn-ui
+* https://github.com/rancher/longhorn-tests
+* https://github.com/rancher/liblonghorn
+* https://github.com/rancher/go-iscsi-helper
+* https://github.com/rancher/sparse-tools
+* https://github.com/rancher/backupstore
+
+*Initial Committers*
+
+ * Sheng Yang @yasker (Rancher Labs), since 10/2015
+ * Darren Shepherd @ibuildthecloud (Rancher Labs), since 03/2016
+
+**Current Maintainer**
+ * Sheng Yang @yasker (Rancher Labs)
+
+*Infrastructure requests (CI / CNCF Cluster):*
+
+_Development needs:_
+
+None at the moment.
+
+_Production needs:_
+
+None at the moment.
+
+*Communication Channels:*
+
+ * Slack: https://rancher-users.slack.com #longhorn-storage channel
+ * Forum: https://forums.rancher.com/c/longhorn
+ * Issue tracker: https://github.com/rancher/longhorn/issues
+
+*Website:* https://github.com/rancher/longhorn/ (will move to https://longhorn.io soon)
+
+*Release methodology and mechanics:*
+The version of Longorn is based on Senmatic Versioning 2.0.0. The version number follows the pattern of MAJOR.MINOR.PATCH. Currently we plan to do about 3 minor versions and 1 major per year. Patch releases according to the necessity.
+
+*Social media accounts:*
+
+ * WIP
+
+*Existing sponsorship:* Rancher Labs
+
+*Community size:*
+
+https://github.com/rancher/longhorn/stargazers[600+ stars]
+#longhorn-storage Slack Channel https://rancher-users.slack.com[200+ users]
+4 full-time engineers
