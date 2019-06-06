@@ -4,7 +4,7 @@
 
 *Project Description:*
 
-Longhorn is a open source distributed block storage software for Kubernetes. Longhorn provides a lightweight and portable persistent storage support for any Kubernetes cluster, no matter where it is hosted.
+Longhorn is an open source distributed block storage software for Kubernetes. Longhorn provides a lightweight and portable persistent storage support for any Kubernetes cluster, no matter where it is hosted.
 
 Longhorn is designed to leverage the existing modern technologies as much as possible, like the high-speed, high capacity SSD and NVMe, and proven Linux storage features like sparse files and cgroups. In Longhorn, every volume is implemented by independent microservices, orchestrated by Kubernetes. With the help of Kubernetes and other technologies, the main code base of Longhorn is only about thirty thousand lines. It's written in Go and broken into well-defined clean modules, so it's easy to understand and work with.
 
@@ -30,13 +30,13 @@ As long as replicas are located in the different nodes, losing nodes wouldn't be
 
 **Manager**
 
-Longhorn manager is built on top of Kubernetes. It implements the control plane of storage operations. It uses CRD and Kubernetes API server to store Longhorn's state in the Kubernetes cluster. The manager relays on the Kubernetes controller pattern to manage the volume status. It also utilizates Kubernetes to implement pod orchestration, cron job, node failure detection, pod failure detection, log collection etc. Building on top of Kubernetes makes the manager implementation much simpler. The manager can focus on storage related operations thanks to the Kubernetes.
+Longhorn manager is built on top of Kubernetes. It implements the control plane of storage operations. It uses CRD and Kubernetes API server to store Longhorn's state in the Kubernetes cluster. The manager relays on the Kubernetes controller pattern to manage the volume status. It also utilizes Kubernetes to implement pod orchestration, cron job, node failure detection, pod failure detection, log collection, etc. Building on top of Kubernetes makes the manager implementation much simpler. The manager can focus on storage-related operations thanks to the Kubernetes.
 
-Besides engine and manager, Longhorn also have an intuitive GUI and a test suite which covers every major features of Longhorn. Integration test cases are required for new features and major bugs in Longhorn.
+Besides engine and manager, Longhorn also has an intuitive GUI and a test suite which covers every major features of Longhorn. Integration test cases are required for new feature and major bug in Longhorn.
 
 *Statement on alignment with CNCF mission:*
 
-Longhorn project aligns with CNCF's mission of making cloud native computing ubiquitous. Today, persistent storage support varies from Kubernetes clusters to Kuberentes clusters. As a result, users cannot deploy stateful workloads that require persistent volumes and expect their stateful workloads to work on any Kubernetes cluster. By creating a portable and lightweight implementation of persistent storage volumes, Longhorn can make persistent storage support available on every Kubernetes cluster and thus can help drive the adoption of Kubernetes technology.
+Longhorn project aligns with CNCF's mission of making cloud-native computing ubiquitous. Today, persistent storage support varies from Kubernetes clusters to Kuberentes clusters. As a result, users cannot deploy stateful workloads that require persistent volumes and expect their stateful workloads to work on any Kubernetes cluster. By creating a portable and lightweight implementation of persistent storage volumes, Longhorn can make persistent storage support available on every Kubernetes cluster and thus can help drive the adoption of Kubernetes technology.
 
 *Sponsors from TOC:* Alexis Richardson and Liz Rice
 
@@ -63,7 +63,7 @@ Longhorn repositories include: (To be moved into a separate organization)
 
 See https://github.com/rancher/longhorn/blob/master/external-dependency.md[external-dependency.md] for details.
 
-The current default Longhorn frontend TGT has binary dependency on a modified version of upstream TGT project. The modified version is hosted at https://github.com/rancher/tgt , with GPLv2 license.
+The current default Longhorn frontend TGT has a binary dependency on a modified version of the upstream TGT project. The modified version is hosted at https://github.com/rancher/tgt , with GPLv2 license.
 
 *Initial Committers*
 
@@ -93,7 +93,7 @@ None at the moment.
 *Website:* https://github.com/rancher/longhorn/ (will move to https://longhorn.io soon)
 
 *Release methodology and mechanics:*
-The version of Longhorn is based on Senmatic Versioning 2.0.0. The version number follows the pattern of MAJOR.MINOR.PATCH. Currently we plan to do about 3 minor versions and 1 major per year. We will do patch releases according to the necessity.
+The version of Longhorn is based on Sematic Versioning 2.0.0. The version number follows the pattern of MAJOR.MINOR.PATCH. We are planning to do about 3 minor versions and 1 major per year. We will do patch releases according to the necessity.
 
 *Social media accounts:*
 
